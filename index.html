@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> My Mongo Project </title>
+	
+	<script type="text/javascript">
+        function showInput() {
+
+            document.getElementById('display').innerHTML = document.getElementById("search").value;
+            //console.log(submitbutton);
+            //<button type="button" onclick="search()">Submit</button>
+
+            for (var i = 0; i < 5; i++) {
+                var iDiv = document.createElement('div');
+                iDiv.id = 'i';
+                iDiv.innerHTML = "New Data";
+                document.getElementById('display').appendChild(iDiv);
+            }
+
+        }
+
+        function showDetail() {
+
+            document.getElementById('detail').innerHTML = document.getElementById("search").value;
+        }
+function showInput() {
+console.log("Showing input");
+  var xhttp = new XMLHttpRequest();
+  var url = "https://localhost:3000/battles/Sack%20of%20Darry";
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+		var myArr = JSON.parse(httpObj.responseText);
+                    console.log(myArr);
+     
+    } else {
+	console.log(this.status);
+	}
+  };
+  
+  xhttp.open("GET", "https://ist.rit.edu/api/about", true);
+  xhttp.send();
+}	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	showInput();	
+    </script>
+	
+</head>
+
+<body>
+    <h1>This will Be the Project Front End Page!!!!!!!!</h1>
+
+    <div class="input-group">
+        <input id="Name" type="text" class="form-control" placeholder="Enter battle" aria-label="Battle" aria-describedby="battle">
+        <input id="submit" value="Get Details" type="button" onclick="searchBattle(document.getElementById('Name').value)">
+    </div>
+
+</body>
+
+
+</html>

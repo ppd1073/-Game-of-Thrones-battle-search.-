@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<style>
+ul {
+    list-style-type: none;
+    
+	margin:0;
+    padding: 0;
+    overflow: hidden;
+	
+	
+   
+}
+
+li {
+    float:left;
+	width: 200px;
+	margin:2px;
+	
+	
+}
+
+li a {
+    display: block;
+    color: #0C7C31;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #4CAF50;
+}
+li:last-child {
+    border-right: none;
+}
+</style>
+    <title> My Mongo Project </title>
+	<script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+         //function showInput() {
+
+           // document.getElementById('display').innerHTML = document.getElementById("search").value;
+            //console.log(submitbutton);
+            //<button type="button" onclick="search()">Submit</button>
+
+          //  for (var i = 0; i < 5; i++) {
+            //    var iDiv = document.createElement('div');
+              //  iDiv.id = 'i';
+                //iDiv.innerHTML = "New Data";
+                //document.getElementById('display').appendChild(iDiv);
+            //}
+
+        //}
+
+      //  function showDetail() {
+		//	document.getElementById("display").addEventListener('click',prop, false);
+           // document.getElementById('detail').innerHTML = document.getElementById("display");
+			//document.getElementById('detail').innerHTML = display;
+        //}
+	
+		
+	
+function showInput() {
+var node = document.getElementById('display');
+while (node.hasChildNodes()) {
+
+    node.removeChild(node.lastChild);
+}
+
+  var xhttp = new XMLHttpRequest();
+ var url = "http://localhost:3000/battle/"+ document.getElementById("search").value;
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+		var myArr = JSON.parse(xhttp.responseText);
+                    console.log("first:"+myArr);
+					 
+					myArr.forEach(function (item){
+					//console.log("second:" +item);
+					//console.log("third:"+item.year);
+					//console.log("third:"+item.attacker_king);
+					//console.log("third:"+item.defender_king);
+					//console.log("third:"+item.note);
+					var iDiv = document.createElement('div');
+					//iDiv.id = 'i';
+					//iDiv.innerHTML = item.name;
+					//iDiv.innerHTML = item.year;
+					iDiv.appendChild(document.createTextNode(item.name));
+					//iDiv.appendChild(document.createTextNode(item.year));
+					document.getElementById('display').appendChild(iDiv);
+					
+					})
+					
+					document.getElementById('display').addEventListener("click", function(){
+						
+						 console.log("clicked" + event.target.innerHTML);
+						//console.log("second" + target);
+						document.getElementById('detail').innerHTML = event.target.innerHTML;
+						var name = event.target.innerHTML;
+						myArr.forEach(function (data){
+							
+							if (data.name === name) {
+								console.log(data.name);
+								getDetails();
+								var details = data.year + data.attacker_king + data.defender_king + data.note ;
+								//console.log(details);
+								console.log(data.image);
+								document.getElementById('im').src= data.image;
+								
+								document.getElementById('detail').innerHTML = details;
+							}
+						});
+						
+					});
+					
+					
+     
+    } else {
+	//console.log(this.status);
+	}
+  };
+  
+  xhttp.open("GET", url, true);
+  xhttp.send();
+  
+  
+}
+
+function getDetails(){
+	console.log("attacker");
+};
+
+
+		
+    </script>
+    
+
+</head>
+
+<body >
+
+
+   <div class = "nav">
+	
+	
+	
+	
+	<ul>
+		<li><a href="#bat">Battle</a></li>
+		<li><a href="#char">Character</a></li>
+		
+	</ul>
+	</div>
+
+
+
+
+<div id = "bat" style="border:1px solid black">
+    <div class="searchBar">
+        <input type="text" id="search">
+        <button type="button" class="btn btn-primary" onclick="showInput()">Submit</button>
+        <p><span id='display' ></span></p>
+    </div>
+    
+    <div id="detail">
+	
+	<img id="im" width="100px" height="200px"> 
+		
+    </div>
+	</div>
+	
+	
+	
+	<div id = "char" style="border:1px solid black">
+    <div class="searchBar">
+        <input type="text" id="search1">
+        <button type="button" class="btn btn-primary" onclick="showInput()">Submit</button>
+        <p><span id='display1' ></span></p>
+    </div>
+    
+    
+	</div>
+
+
+
+</body>
+
+</html>
